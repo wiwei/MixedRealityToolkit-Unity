@@ -77,14 +77,22 @@ namespace Microsoft.MixedReality.Toolkit.SDK.Input
 
         #region IMixedRealityManager Implementation
 
-        // Input system is critical, so should be processed before all other managers
-        public override uint Priority { get; set; } = 1;
+        /// <inheritdoc />
+        /// <remarks>
+        /// Input system is critical, so should be processed before all other managers
+        /// </remarks>
+        public override uint Priority => 1;
 
         /// <inheritdoc />
         public override void Initialize()
         {
             base.Initialize();
-            CurrentInputActionRulesProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionRulesProfile;
+
+            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile != null)
+            {
+                CurrentInputActionRulesProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionRulesProfile;
+            }
+
             InitializeInternal();
             InputEnabled?.Invoke();
         }

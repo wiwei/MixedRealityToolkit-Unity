@@ -250,7 +250,7 @@ namespace Microsoft.MixedReality.Toolkit.Core.Inspectors.Profiles
 
             if (!changed)
             {
-                changed = EditorGUI.EndChangeCheck();
+                changed |= EditorGUI.EndChangeCheck();
             }
 
             EditorGUIUtility.labelWidth = previousLabelWidth;
