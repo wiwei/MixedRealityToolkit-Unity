@@ -25,13 +25,13 @@ namespace Microsoft.MixedReality.Toolkit.Core.Definitions.Devices
 
         public MixedRealityControllerMapping[] MixedRealityControllerMappingProfiles => mixedRealityControllerMappingProfiles;
 
+#if UNITY_EDITOR
+
         private static Type[] controllerMappingTypes;
 
         public static Type[] ControllerMappingTypes { get { CollectControllerTypes(); return controllerMappingTypes; } }
 
         public static Type[] CustomControllerMappingTypes { get => (from type in ControllerMappingTypes where UsesCustomInteractionMapping(type) select type).ToArray(); }
-
-#if UNITY_EDITOR
 
         private static void CollectControllerTypes()
         {
