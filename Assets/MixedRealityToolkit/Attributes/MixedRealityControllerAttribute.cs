@@ -5,6 +5,7 @@ using Microsoft.MixedReality.Toolkit.Core.Definitions.Devices;
 using Microsoft.MixedReality.Toolkit.Core.Definitions.Utilities;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Microsoft.MixedReality.Toolkit.Core.Attributes
 {
@@ -56,9 +57,18 @@ namespace Microsoft.MixedReality.Toolkit.Core.Attributes
         /// <summary>
         /// Convenience function for retrieving the attribute given a certain class type.
         /// </summary>
+        /// <remarks>
+        /// This function is only available in a UnityEditor context.
+        /// </remarks>
         public static MixedRealityControllerAttribute Find(Type type)
         {
+#if WINDOWS_UWP && !ENABLE_IL2CPP
+            // Type.GetCustomAttributes() doesn't exist on UWP .NET, so we have to indirectly use
+            // the TypeInfo instead.
+            return type.GetTypeInfo().GetCustomAttributes(typeof(MixedRealityControllerAttribute), true).FirstOrDefault() as MixedRealityControllerAttribute;
+#else
             return type.GetCustomAttributes(typeof(MixedRealityControllerAttribute), true).FirstOrDefault() as MixedRealityControllerAttribute;
+#endif
         }
     }
 }
