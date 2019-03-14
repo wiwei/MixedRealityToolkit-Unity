@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Microsoft.MixedReality.Toolkit.Core.Utilities.InspectorFields;
+using Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.ClassProvider;
 using Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.Themes;
 using System;
 using System.Collections;
@@ -39,18 +40,11 @@ namespace Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.Profile
             List<Type> themeTypes = new List<Type>();
             List<string> names = new List<string>();
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblies)
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    TypeInfo info = type.GetTypeInfo();
-                    if (info.BaseType != null && (info.BaseType.Equals(typeof(InteractableThemeBase)) || info.BaseType.Equals(typeof(InteractableShaderTheme)) || info.BaseType.Equals(typeof(InteractableColorTheme))))
-                    {
-                        themeTypes.Add(type);
-                        names.Add(type.Name);
-                    }
-                }
+            var types = InteractableClassLoader.GetTypes(BaseInteractableClassProvider.InteractableType.Theme);
+            foreach (var type in types)
+            { 
+                themeTypes.Add(type);
+                names.Add(type.Name);
             }
             
             ThemeLists lists = new ThemeLists();

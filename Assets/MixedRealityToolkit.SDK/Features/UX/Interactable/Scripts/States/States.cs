@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.ClassProvider;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,19 +57,11 @@ namespace Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.States
             List<Type> stateTypes = new List<Type>();
             List<string> names = new List<string>();
 
-
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblies)
+            var types = InteractableClassLoader.GetTypes(BaseInteractableClassProvider.InteractableType.State);
+            foreach (var type in types)
             {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    TypeInfo info = type.GetTypeInfo();
-                    if (info.BaseType != null && (info.BaseType.Equals(typeof(InteractableStates)) || type.Equals(typeof(InteractableStates))))
-                    {
-                        stateTypes.Add(type);
-                        names.Add(type.Name);
-                    }
-                }
+                stateTypes.Add(type);
+                names.Add(type.Name);
             }
 
             StateOptions = names.ToArray();

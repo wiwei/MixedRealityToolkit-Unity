@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Microsoft.MixedReality.Toolkit.Core.Utilities.InspectorFields;
+using Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.ClassProvider;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -99,19 +100,12 @@ namespace Microsoft.MixedReality.Toolkit.SDK.UX.Interactable.Events
         {
             List<Type> eventTypes = new List<Type>();
             List<string> names = new List<string>();
-            
-            var assemblys = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblys)
+
+            var types = InteractableClassLoader.GetTypes(BaseInteractableClassProvider.InteractableType.Event);
+            foreach (var type in types)
             {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    TypeInfo info = type.GetTypeInfo();
-                    if (info.BaseType != null && info.BaseType.Equals(typeof(ReceiverBase)))
-                    {
-                        eventTypes.Add(type);
-                        names.Add(type.Name);
-                    }
-                }
+                eventTypes.Add(type);
+                names.Add(type.Name);
             }
 
             EventLists lists = new EventLists();
