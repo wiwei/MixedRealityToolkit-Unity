@@ -67,24 +67,10 @@ public class SpatialFloor : MonoBehaviour
             var meshValue = mesh.Value;
             foreach (var vertex in meshValue.Filter.sharedMesh.vertices)
             {
-                values.Add(vertex.y);
-                if (values.Count > 5)
-                {
-                    values.Sort();
-                    values.RemoveAt(5);
-                }
+                lowestY = System.Math.Min(lowestY, vertex.y);
             }
         }
-
-        if (values.Count != 0)
-        {
-            foreach (var value in values)
-            {
-                lowestY += value;
-            }
-            lowestY /= values.Count;
-        }
-
+        
         Vector3 currentPosition = gameObject.transform.position;
         currentPosition.y = lowestY;
         gameObject.transform.position = currentPosition;
