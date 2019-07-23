@@ -71,6 +71,7 @@ MonoBehaviour:
   pressDistance: 0.006
   releaseDistanceDelta: 0.001
   returnSpeed: 25
+  releaseOnTouchEnd: 1
   enforceFrontPush: 1
   distanceSpaceMode: 0
   TouchBegin:
@@ -202,6 +203,7 @@ MonoBehaviour:
   InputActionId: 0
   IsGlobal: 0
   Dimensions: 1
+  StartDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
   VoiceCommand: Select
@@ -296,6 +298,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
       Options: []
     HideUnityEvents: 0
+  dimensionIndex: 0
 --- !u!82 &316800719
 AudioSource:
   m_ObjectHideFlags: 0
