@@ -62,6 +62,17 @@ We provide basic examples for logging and loading eye tracking data and examples
 
 ## Setting up the MRTK eye tracking samples
 
+### Prerequisites
+
+Note that using the eye tracking samples on device requires a device that supports
+eye tracking and a sample app package that is built with the "Gaze Input" capability
+on the package's AppXManifest.
+
+The list of requirements is captured in this [document](EyeTracking_BasicSetup.md#eye-tracking-requirements-checklist).
+In order for the eye tracking samples to work on-device, all steps listed in that document
+must have been followed (the samples already have the first two steps accounted for,
+and as a result building the samples only requires the third and fourth steps).
+
 ### 1. Load EyeTrackingDemo-00-RootScene.unity
 The *EyeTrackingDemo-00-RootScene* is the base (_root_) scene that has all the core MRTK components included.
 This is the scene that you need to load first and from which you will run the eye tracking demos. 
